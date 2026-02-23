@@ -6,7 +6,7 @@ from dash import Dash, dcc, html, Input, Output
 import plotly.graph_objects as go
 import plotly.express as px
 
-API_KEY = "adf80bf8f63b4e7b93e38172ca1a6937"
+API_KEY = os.environ.get("API_KEY")
 headers = {"X-Auth-Token": API_KEY}
 BASE_URL = "https://api.football-data.org/v4"
 LIVERPOOL_ID = 64
