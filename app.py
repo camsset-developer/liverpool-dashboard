@@ -184,9 +184,15 @@ def update_dashboard(selected_season):
     fig4.update_layout(plot_bgcolor="white", paper_bgcolor="white")
 
     top5 = standings.groupby("season").apply(lambda x: x.nsmallest(5, "position")).reset_index(drop=True)
-    fig5 = px.bar(top5, x="team", y="points", color="season", barmode="group",
-                  color_discrete_map=color_map, text="points",
-                  title="Top 5 Premier League — Comparativa de Puntos")
+    if "season" not in top5.columns or top5["season"].nunique() < 2:
+        top5 = standings.nsmallest(5, "position").copy()
+        fig5 = px.bar(top5, x="team", y="points", text="points",
+                      color_discrete_sequence=[ROJO],
+                      title="Top 5 Premier League")
+    else:
+        fig5 = px.bar(top5, x="team", y="points", color="season", barmode="group",
+                      color_discrete_map=color_map, text="points",
+                      title="Top 5 Premier League — Comparativa de Puntos")
     fig5.update_traces(textposition="outside")
     fig5.update_layout(plot_bgcolor="white", paper_bgcolor="white", xaxis_tickangle=-20)
 
