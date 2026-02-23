@@ -14,9 +14,9 @@ PL_ID = 2021
 seasons = [2023, 2024]
 
 # Cargar datos desde CSV
-df_matches = pd.read_csv("data/raw/matches.csv")
-df_standings = pd.read_csv("data/raw/standings.csv")
-df_scorers = pd.read_csv("data/raw/scorers.csv")
+df_matches = pd.read_csv("matches.csv")
+df_standings = pd.read_csv("standings.csv")
+df_scorers = pd.read_csv("scorers.csv")
 
 # Preparar matches
 pl_matches = df_matches[df_matches["competition"] == "Premier League"].copy()
